@@ -1,5 +1,5 @@
 import sys
-import pathlib as path 
+from pathlib import Path
 
 # Lits of all signature files and magic numbers
 SIGNATURES = [
@@ -15,7 +15,7 @@ SIGNATURES = [
 (b"GIF87a", "GIF"),
 (b"GIF89a", "GIF"),
 (b"BM", "BMP"),
-(b"II*\x00" "TIFF (little endian)"),
+(b"II*\x00", "TIFF (little endian)"),
 (b"MM\x00*", "TIFF (big endian)"),
 (b"\x00\x00\x01\x00", "ICO"),
 (b"RIFF", "WEBP (needs deeper check)"),
@@ -64,3 +64,26 @@ SIGNATURES = [
 (b"ssh-rsa", "SSH public key")
 ]
 
+def get_path_from_user():
+    file_path = input("Enter full path of the file: ")
+
+    if file_path == "":
+        return "This section cannot be empty"
+
+    path = Path(file_path)
+
+    if not path.exists():
+        return "This is not a valid path"
+        
+    if path.is_dir():
+        return "This is a directory please provide full path of file"
+    
+    if path.is_file():
+        return path
+
+        
+    
+ 
+
+#print(encoded_bytes)
+#print(type(encoded_bytes))
