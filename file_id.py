@@ -65,25 +65,53 @@ SIGNATURES = [
 ]
 
 def get_path_from_user():
-    file_path = input("Enter full path of the file: ")
+    while True:
+        file_path = input("Enter full path of the file: ").strip()
 
-    if file_path == "":
-        return "This section cannot be empty"
+        if file_path == "":
+            print("This section cannot be empty.")
+            continue
 
-    path = Path(file_path)
+        path = Path(file_path)
 
-    if not path.exists():
-        return "This is not a valid path"
+        if not path.exists():
+            print("This is not a valid path.")
+            continue
+
+        if path.is_dir():
+            print("This is a directory. Please provide the full path of a file.")
+            continue
+
+        if path.is_file():
+            return path
+
+
+def read_header_bytes(path, n=64):
+    with open(path, "rb") as f:
+        header = f.read(n)
+    return header
+
+
+def header_scanner(head,sig):
+    head = read_header_bytes()
+    sig = SIGNATURES
+    for i in sig:
         
-    if path.is_dir():
-        return "This is a directory please provide full path of file"
-    
-    if path.is_file():
-        return path
 
-        
-    
+
+def main():
+    path = get_path_from_user()
+    print(f"Using file: {path}")
+
+    header = read_header_bytes(path, n=64)
+    print(header)
+    print(header.hex())
+
+
+if __name__ == "__main__":
+    main()
+
+
  
-
 #print(encoded_bytes)
 #print(type(encoded_bytes))
