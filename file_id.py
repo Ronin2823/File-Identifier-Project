@@ -100,6 +100,17 @@ def header_scanner(head,sig):
 
 
 def main():
+    print(r"""
+ ███████╗██╗██╗     ███████╗    ██╗██████╗ 
+ ██╔════╝██║██║     ██╔════╝    ██║██╔══██╗
+ █████╗  ██║██║     █████╗      ██║██║  ██║
+ ██╔══╝  ██║██║     ██╔══╝      ██║██║  ██║
+ ██║     ██║███████╗███████╗    ██║██████╔╝
+ ╚═╝     ╚═╝╚══════╝╚══════╝    ╚═╝╚═════╝ 
+
+      Magic Number Signature Scanner
+""")
+
     path = get_path_from_user()
     header = read_header_bytes(path, n=64)
     result = header_scanner(header, SIGNATURES)
