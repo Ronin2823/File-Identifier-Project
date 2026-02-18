@@ -93,19 +93,20 @@ def read_header_bytes(path, n=64):
 
 
 def header_scanner(head,sig):
-    head = read_header_bytes()
-    sig = SIGNATURES
-    for i in sig:
-        
+    for x, y in sig:
+        if head.startswith(x):
+            return y 
+        return None
 
 
 def main():
     path = get_path_from_user()
-    print(f"Using file: {path}")
-
     header = read_header_bytes(path, n=64)
-    print(header)
-    print(header.hex())
+    result = header_scanner(header, SIGNATURES)
+    if result:
+        print(f"Detected file type: {result}")
+    else:
+        print("Unknown or Text File")
 
 
 if __name__ == "__main__":
