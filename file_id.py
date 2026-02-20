@@ -86,7 +86,7 @@ def get_path_from_user():
             return path
 
 
-def read_header_bytes(path, n=64):
+def read_header_bytes(path, n=32):
     with open(path, "rb") as f:
         header = f.read(n)
     return header
@@ -114,16 +114,13 @@ def main():
     path = get_path_from_user()
     header = read_header_bytes(path, n=64)
     result = header_scanner(header, SIGNATURES)
+    print(type(header)) #Test chekcing if returns byte
+    print(header) #Test checking if printing the appropriate header
     if result:
         print(f"Detected file type: {result}")
     else:
-        print("Unknown or Text File")
+        print("Unknown")
 
 
 if __name__ == "__main__":
     main()
-
-
- 
-#print(encoded_bytes)
-#print(type(encoded_bytes))
