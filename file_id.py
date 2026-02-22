@@ -86,7 +86,7 @@ def get_path_from_user():
             return path
 
 
-def read_header_bytes(path, n=32):
+def read_header_bytes(path, n=64):
     with open(path, "rb") as f:
         header = f.read(n)
     return header
@@ -96,7 +96,7 @@ def header_scanner(head,sig):
     for x, y in sig:
         if head.startswith(x):
             return y 
-        return None
+    return None #Error fixed 
 
 
 def main():
