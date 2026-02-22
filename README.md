@@ -55,3 +55,23 @@ Overall, today reinforced the importance of:
 - Thinking in terms of data flow rather than isolated code snippets
 
 This session strengthened both my understanding of Python’s function mechanics and my grasp of how content-based file detection works at a practical level.
+
+
+
+February 22, 2026 
+
+Today’s progress focused on debugging and improving the reliability of the file signature detection process within the file type identifier. While testing image files, I discovered that valid PNG files were being incorrectly classified as `Unknown`, indicating a flaw in the signature scanning logic rather than the signature definitions themselves.
+
+The issue was traced to the `header_scanner()` function, where a `return None` statement was unintentionally placed inside the iteration loop. This caused the scanner to stop after evaluating only the first signature, preventing the program from checking the remaining magic numbers. Refactoring the control flow by moving the return statement outside the loop ensured that all signatures are evaluated before determining that no match exists.
+
+After applying the fix, file detection behaved as expected, successfully identifying PNG and other supported formats based on binary headers.
+
+Overall, today reinforced the importance of:
+
+- Carefully analyzing loop control flow and return placement
+- Understanding how early returns affect program execution
+- Validating logic through real file testing rather than assumptions
+- Debugging by isolating behavior instead of rewriting working components
+- Writing functions that fully execute their intended responsibility
+
+This session strengthened my debugging workflow and deepened my understanding of how small control-flow mistakes can significantly impact program behavior in content-based file analysis systems.
